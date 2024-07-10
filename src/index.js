@@ -3,6 +3,7 @@ import http from 'http';
 import { App } from 'octokit';
 import config from './config';
 import { VertexAIService } from './services/aiService/vertexAIService';
+import { AdaService } from './services/aiService/adaService';
 import logger from './utils/logger.js';
 import { setupWebhooks } from './webhooks.js';
 
@@ -47,7 +48,12 @@ async function main() {
   }
 
   logger.info('Setting up webhooks...');
-  const aiService = new VertexAIService();
+  let aiService;
+  if (config.AI_PROVIDER == 'vertexai') {
+    aiService = new VertexAIService();
+  } else if (config.AI_PROVIDER == 'ada') {
+    aiService = new AdaService()
+  }
   setupWebhooks(app, aiService);
 
   // Create and start the server

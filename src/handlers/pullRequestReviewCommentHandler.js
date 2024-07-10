@@ -18,6 +18,7 @@ export class PullRequestReviewCommentHandler {
     const repo = payload.repository;
     const pullNumber = payload.pull_request.number;
     const commentId = payload.comment.id;
+    const uniqueId = `${owner}-${repo.name}-${pullNumber}`;
 
     logger.info('Processing pull request review comment', {
       owner,
@@ -57,10 +58,14 @@ export class PullRequestReviewCommentHandler {
         payload
       );
 
+      const projectID = await this.aiService.getContext(
+        uniqueId,
+      );
+
       // Get AI response
       const aiResponse = await this.aiService.getResponse(
         aiContext,
-        config.AI_PROJECT_ID
+        projectID,
       );
 
       // Post response as a new comment

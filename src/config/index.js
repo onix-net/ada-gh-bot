@@ -10,22 +10,17 @@ const config = {
   APP_ID: process.env.APP_ID || '869280',
   PRIVATE_KEY: process.env.ADA_GH_APP_PRIVATE_KEY,
   WEBHOOK_SECRET: process.env.ADA_GH_APP_SECRET,
-  GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID || '',
-  GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET || '',
 
   // AI Service Configuration
-  AI_SERVICE: process.env.AI_SERVICE || 'anthropic', // Default to Anthropic
-  AI_API_KEY: process.env.ADA_API_KEY,
   AI_PROJECT_ID: process.env.AI_PROJECT_ID,
+  AI_PROVIDER: process.env.AI_PROVIDER || 'vertexai',
 
-  // Anthropic-specific configuration
-  ANTHROPIC_API_URL:
-    process.env.ANTHROPIC_API_URL || 'https://api.anthropic.com',
-  ANTHROPIC_MODEL: process.env.ANTHROPIC_MODEL || 'claude-2',
+  // Ada-specific configuration
+  ADA_API_URL: process.env.ADA_API_URL || 'https://ada-api.containerlabs.io',
+  ADA_API_KEY: process.env.ADA_API_KEY,
 
-  // OpenAI-specific configuration
-  OPENAI_API_URL: process.env.OPENAI_API_URL || 'https://api.openai.com',
-  OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-3.5-turbo',
+  // Vertexai-specific configuration
+  VERTEX_AI_PROJECT: process.env.VERTEX_AI_PROJECT || 'onix-duet',
 
   // Application Configuration
   PORT: process.env.PORT || 9900,
@@ -37,7 +32,7 @@ const config = {
   RATE_LIMIT_WINDOW_MS: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 60000, // 1 minute
 
   // Bot Configuration
-  BOT_NAME: process.env.BOT_NAME || 'github-ai-bot',
+  BOT_NAME: process.env.BOT_NAME || 'onix-parrot',
 
   // Feature Flags
   ENABLE_PR_REVIEW: process.env.ENABLE_PR_REVIEW === 'true',
@@ -47,7 +42,7 @@ const config = {
 };
 
 // Validate required configuration
-const requiredConfig = ['PRIVATE_KEY', 'WEBHOOK_SECRET', 'AI_API_KEY'];
+const requiredConfig = ['PRIVATE_KEY', 'WEBHOOK_SECRET',];
 for (const key of requiredConfig) {
   if (!config[key]) {
     throw new Error(`Missing required configuration: ${key}`);

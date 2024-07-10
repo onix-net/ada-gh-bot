@@ -17,6 +17,7 @@ export class IssueOpenedHandler {
     const owner = payload.repository.owner.login;
     const repo = payload.repository;
     const issueNumber = payload.issue.number;
+    const uniqueId = `${owner}-${repo.name}-${issueNumber}`;
 
     logger.info('Processing newly opened issue', {
       owner,
@@ -35,10 +36,13 @@ export class IssueOpenedHandler {
     // Prepare context for AI
     const aiContext = this.buildAiContext(issue);
 
+    const projectID = await this.aiService.getContext(
+      uniqueId,
+    );
     // Get AI response
     const aiResponse = await this.aiService.getResponse(
       aiContext,
-      config.AI_PROJECT_ID
+      projectID,
     );
 
     // Post initial comment

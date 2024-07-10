@@ -21,6 +21,7 @@ export class LabelHandler {
       : payload.pull_request.number;
     const labelName = payload.label.name;
     const action = payload.action;
+    const uniqueId = `${owner}-${repo.name}-${issueNumber}`;
 
     logger.info('Processing label event', {
       owner,
@@ -80,10 +81,14 @@ export class LabelHandler {
       'added'
     );
 
+    const projectID = await this.aiService.getContext(
+      uniqueId,
+    );
+
     // Get AI response
     const aiResponse = await this.aiService.getResponse(
       aiContext,
-      config.AI_PROJECT_ID
+      projectID,
     );
 
     // Post comment with AI response
@@ -127,10 +132,14 @@ export class LabelHandler {
       'removed'
     );
 
+    const projectID = await this.aiService.getContext(
+      uniqueId,
+    );
+
     // Get AI response
     const aiResponse = await this.aiService.getResponse(
       aiContext,
-      config.AI_PROJECT_ID
+      projectID,
     );
 
     // Post comment with AI response

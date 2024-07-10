@@ -18,6 +18,7 @@ export class PullRequestHandler {
     const repo = payload.repository;
     const pullNumber = payload.pull_request.number;
     const action = payload.action;
+    const uniqueId = `${owner}-${repo.name}-${issueNumber}`;
 
     logger.info('Processing pull request event', {
       owner,
@@ -69,10 +70,14 @@ export class PullRequestHandler {
     // Prepare context for AI
     const aiContext = this.buildAiContext(pullRequest, diffData);
 
+    const projectID = await this.aiService.getContext(
+      uniqueId,
+    );
+
     // Get AI response
     const aiResponse = await this.aiService.getResponse(
       aiContext,
-      config.AI_PROJECT_ID
+      projectID,
     );
 
     // Post initial comment

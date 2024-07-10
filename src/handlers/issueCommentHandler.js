@@ -22,6 +22,7 @@ export class IssueCommentHandler {
     const issueNumber = payload.issue.number;
     const commentBody = payload.comment.body;
     const commentAuthor = payload.comment.user.login;
+    const uniqueId = `${owner}-${repoName}-${issueNumber}`;
 
     logger.info('Processing issue comment', {
       owner,
@@ -67,9 +68,13 @@ export class IssueCommentHandler {
         comments.data,
         commentBody
       );
+      const projectID = await this.aiService.getContext(
+        uniqueId,
+      );
+
       const aiResponse = await this.aiService.getResponse(
         aiContext,
-        config.AI_PROJECT_ID
+        projectID,
       );
 
       await this.githubService.createComment(

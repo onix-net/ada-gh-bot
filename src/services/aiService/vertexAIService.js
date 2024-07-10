@@ -1,21 +1,20 @@
 import { VertexAI } from '@google-cloud/vertexai';
 import { AppError } from '../../utils/errors.js';
 import { AIService } from './index.js';
+import config  from '../../config'
 
 export class VertexAIService extends AIService {
   constructor() {
     super();
-    // this.apiKey = config.ANTHROPIC_API_KEY;
-    // this.apiUrl = config.ANTHROPIC_API_URL;
+    this.gcpProjectId = config.VERTEX_AI_PROJECT;
   }
 
   async getResponse(prompt, projectId) {
     try {
-      const gcpProjectId = 'ada-test-1234';
       const location = 'us-central1';
       const modelId = 'gemini-1.5-flash-001';
 
-      const vertexAI = new VertexAI({ project: gcpProjectId, location });
+      const vertexAI = new VertexAI({ project: this.gcpProjectId, location });
 
       const generativeModel = vertexAI.getGenerativeModel({
         model: modelId,
@@ -32,5 +31,7 @@ export class VertexAIService extends AIService {
     }
   }
 
-  async getContext() {}
+  async getContext(name) {
+    return "none"
+  }
 }

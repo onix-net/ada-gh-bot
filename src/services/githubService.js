@@ -3,7 +3,7 @@ import { AppError } from '../utils/errors.js';
 import logger from '../utils/logger.js';
 
 class GitHubService {
-  constructor(octokit, botName = 'ada-app-app') {
+  constructor(octokit, botName = 'onix-parrot') {
     this.octokit = octokit;
     this.botName = botName;
     logger.info(`GitHubService initialized for bot: ${this.botName}`);
