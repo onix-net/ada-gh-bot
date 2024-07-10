@@ -13,4 +13,4 @@ upload-onix:
 					--execution-environment=gen2 \
 					--region=us-west2 \
 					--project=onix-duet \
-					&& gcloud run services update-traffic onix-gh-app --to-latest --region us-west2
+					&& gcloud run services update-traffic onix-gh-app --to-latest --region us-west2 --project=onix-duet

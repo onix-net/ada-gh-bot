@@ -52,7 +52,7 @@ async function main() {
   if (config.AI_PROVIDER == 'vertexai') {
     aiService = new VertexAIService();
   } else if (config.AI_PROVIDER == 'ada') {
-    aiService = new AdaService()
+    aiService = new AdaService();
   }
   setupWebhooks(app, aiService);
 
@@ -61,7 +61,6 @@ async function main() {
   const middleware = createNodeMiddleware(app.webhooks, { path: '/webhook' });
 
   const server = http.createServer(middleware);
-
   server.listen(config.PORT, () => {
     logger.info(`Server is listening for events at: ${localWebhookUrl}`);
     logger.info('Press Ctrl + C to quit.');
