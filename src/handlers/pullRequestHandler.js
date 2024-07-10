@@ -70,15 +70,10 @@ export class PullRequestHandler {
     // Prepare context for AI
     const aiContext = this.buildAiContext(pullRequest, diffData);
 
-    const projectID = await this.aiService.getContext(
-      uniqueId,
-    );
+    const projectID = await this.aiService.getContext(uniqueId);
 
     // Get AI response
-    const aiResponse = await this.aiService.getResponse(
-      aiContext,
-      projectID,
-    );
+    const aiResponse = await this.aiService.getResponse(aiContext, projectID);
 
     // Post initial comment
     await this.githubService.createComment(owner, repo, pullNumber, aiResponse);

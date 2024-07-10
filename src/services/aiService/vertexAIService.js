@@ -1,7 +1,7 @@
 import { VertexAI } from '@google-cloud/vertexai';
 import { AppError } from '../../utils/errors.js';
 import { AIService } from './index.js';
-import config  from '../../config'
+import config from '../../config';
 
 export class VertexAIService extends AIService {
   constructor() {
@@ -32,6 +32,6 @@ export class VertexAIService extends AIService {
   }
 
   async getContext(name) {
-    return "none"
+    return 'none';
   }
 }

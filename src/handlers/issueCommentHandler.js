@@ -68,14 +68,9 @@ export class IssueCommentHandler {
         comments.data,
         commentBody
       );
-      const projectID = await this.aiService.getContext(
-        uniqueId,
-      );
+      const projectID = await this.aiService.getContext(uniqueId);
 
-      const aiResponse = await this.aiService.getResponse(
-        aiContext,
-        projectID,
-      );
+      const aiResponse = await this.aiService.getResponse(aiContext, projectID);
 
       await this.githubService.createComment(
         owner,

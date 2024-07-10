@@ -6,6 +6,6 @@ export class MockAIService extends AIService {
   }
 
   async getContext(name) {
-    return "none"
+    return 'none';
   }
 }

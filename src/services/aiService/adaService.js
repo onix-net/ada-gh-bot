@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AppError } from '../../utils/errors.js';
 import { AIService } from './index.js';
-import config  from '../../config'
+import config from '../../config';
 import logger from '../../utils/logger.js';
 
 export class AdaService extends AIService {
@@ -12,10 +12,12 @@ export class AdaService extends AIService {
   }
 
   async getResponse(prompt, projectId) {
-    logger.info(JSON.stringify({
-      prompt: prompt,
-      projectId: `${projectId}`,
-    }))
+    logger.info(
+      JSON.stringify({
+        prompt: prompt,
+        projectId: `${projectId}`,
+      })
+    );
     try {
       const response = await axios.post(
         `${this.apiUrl}/prompt/`,

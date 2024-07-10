@@ -81,15 +81,10 @@ export class LabelHandler {
       'added'
     );
 
-    const projectID = await this.aiService.getContext(
-      uniqueId,
-    );
+    const projectID = await this.aiService.getContext(uniqueId);
 
     // Get AI response
-    const aiResponse = await this.aiService.getResponse(
-      aiContext,
-      projectID,
-    );
+    const aiResponse = await this.aiService.getResponse(aiContext, projectID);
 
     // Post comment with AI response
     await this.githubService.createComment(
@@ -132,15 +127,10 @@ export class LabelHandler {
       'removed'
     );
 
-    const projectID = await this.aiService.getContext(
-      uniqueId,
-    );
+    const projectID = await this.aiService.getContext(uniqueId);
 
     // Get AI response
-    const aiResponse = await this.aiService.getResponse(
-      aiContext,
-      projectID,
-    );
+    const aiResponse = await this.aiService.getResponse(aiContext, projectID);
 
     // Post comment with AI response
     await this.githubService.createComment(

@@ -42,7 +42,7 @@ const config = {
 };
 
 // Validate required configuration
-const requiredConfig = ['PRIVATE_KEY', 'WEBHOOK_SECRET',];
+const requiredConfig = ['PRIVATE_KEY', 'WEBHOOK_SECRET'];
 for (const key of requiredConfig) {
   if (!config[key]) {
     throw new Error(`Missing required configuration: ${key}`);

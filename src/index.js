@@ -6,6 +6,7 @@ import { VertexAIService } from './services/aiService/vertexAIService';
 import { AdaService } from './services/aiService/adaService';
 import logger from './utils/logger.js';
 import { setupWebhooks } from './webhooks.js';
+import AIServiceFactory from './services/aiService/serviceFactory';
 
 // Load environment variables
 // dotenv.config();
@@ -48,12 +49,7 @@ async function main() {
   }
 
   logger.info('Setting up webhooks...');
-  let aiService;
-  if (config.AI_PROVIDER == 'vertexai') {
-    aiService = new VertexAIService();
-  } else if (config.AI_PROVIDER == 'ada') {
-    aiService = new AdaService();
-  }
+  const aiService = AIServiceFactory.createAIService();
   setupWebhooks(app, aiService);
 
   // Create and start the server
