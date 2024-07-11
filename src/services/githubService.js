@@ -1,11 +1,12 @@
 // src/services/githubService.js
 import { AppError } from '../utils/errors.js';
 import logger from '../utils/logger.js';
+import config from '../config/index.js';
 
 class GitHubService {
-  constructor(octokit, botName = 'onix-parrot') {
+  constructor(octokit) {
     this.octokit = octokit;
-    this.botName = botName;
+    this.botName = config.BOT_NAME;
     logger.info(`GitHubService initialized for bot: ${this.botName}`);
   }
 

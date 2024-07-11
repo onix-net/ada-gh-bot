@@ -12,7 +12,7 @@ const config = {
   WEBHOOK_SECRET: process.env.ADA_GH_APP_SECRET,
 
   // AI Service Configuration
-  AI_PROJECT_ID: process.env.AI_PROJECT_ID,
+  AI_PROJECT_ID: process.env.AI_PROJECT_ID || 'foo',
   AI_PROVIDER: process.env.AI_PROVIDER || 'vertexai',
 
   // Ada-specific configuration
