@@ -123,6 +123,13 @@ export class IssueCommentHandler {
             '- `/label remove <label>`: Remove a label from this issue/PR'
         );
         break;
+      case '/release-to-customer':
+        await this.githubService.createComment(
+          owner,
+          repo,
+          issueNumber,
+          `You got it! Starting the release process...`
+        );
       case '/status':
         // Implement status checking logic
         break;
